@@ -1,0 +1,15 @@
+name: Compile HTML
+
+on: push
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: "main.tex -f latex -t html -s -o index.html"
+      - uses: actions/upload-artifact@master
+        with:
+          name: HTML
+          path: index.html
